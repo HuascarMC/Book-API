@@ -59,10 +59,11 @@ class Book {
 	@NotNull
 	private Money price;;
 
-	Book(String title, String description, LocalDate publishedDate) {
+	Book(String title, String description, LocalDate publishedDate, Money price) {
 		this.title = title;
 		this.description = description;
 		this.publishedDate = publishedDate;
+		this.price = price;
 	}
 }
 
