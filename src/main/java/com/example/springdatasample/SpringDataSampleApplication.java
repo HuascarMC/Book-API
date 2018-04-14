@@ -54,7 +54,10 @@ class Book {
 	@Size(max=255)
 	private String description;
 	@NotNull
-  private LocalDate publishedDate;
+  private LocalDate publishedDate
+	@Embedded
+	@NotNull
+	private Money price;;
 
 	Book(String title, String description, LocalDate publishedDate) {
 		this.title = title;
