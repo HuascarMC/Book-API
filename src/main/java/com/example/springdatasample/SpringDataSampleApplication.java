@@ -29,8 +29,8 @@ public class SpringDataSampleApplication {
 		return args -> {
 			bookRepository.save(new Book("Spring Microservices", "Learn how to efficiently build and implement microservices in Spring," +
 					"and how to use Docker and Mesos to push the boundaries. Examine a number of real-world use cases and hands-on code examples." +
-					"Distribute your microservices in a completely new way", LocalDate.of(2016, 05, 21 )));
-			bookRepository.save(new Book("Pro Spring Boot", "A no-nonsense guide containing case studies and best practise for Spring Boot", LocalDate.of(2016, 05, 21 )));
+					"Distribute your microservices in a completely new way", LocalDate.of(2016, 05, 21 ), new Money(new BigDecimal(42.90))));
+			bookRepository.save(new Book("Pro Spring Boot", "A no-nonsense guide containing case studies and best practise for Spring Boot", LocalDate.of(2016, 05, 21 ), new Money(new BigDecimal(42.90))));
 		};
 	}
 
@@ -54,10 +54,10 @@ class Book {
 	@Size(max=255)
 	private String description;
 	@NotNull
-  private LocalDate publishedDate
+  private LocalDate publishedDate;
 	@Embedded
 	@NotNull
-	private Money price;;
+	private Money price;
 
 	Book(String title, String description, LocalDate publishedDate, Money price) {
 		this.title = title;
@@ -86,7 +86,7 @@ class Money {
    private BigDecimal amount;
    private Currency currency;
    Money(BigDecimal amount){
-      this(Currency.USD, this.amount);
+      this(Currency.USD, amount);
    }
    Money(Currency currency, BigDecimal amount){
       this.currency = currency;
