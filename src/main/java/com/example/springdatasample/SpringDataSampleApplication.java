@@ -56,5 +56,5 @@ public class SpringDataSampleApplication {
 	}
 
 	@RepositoryRestResource
-	interface  BookRepository extends CrudRepository {
+	interface  BookRepository extends CrudRepository<Book, Long> {
 	}
