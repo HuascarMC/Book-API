@@ -1,4 +1,4 @@
-package com.example.springdatasample;
+package com.example;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,37 +24,39 @@ import java.util.List;
 @SpringBootApplication
 public class SpringDataSampleApplication {
 
-
-		@Bean
-		CommandLineRunner initData(BookRepository bookRepository)	{
-	   return args -> {
-	      bookRepository.save(new Book("Spring Microservices", "Learn how to efficiently build and implement microservices in Spring,\n" +
-	            "and how to use Docker and Mesos to push the boundaries. Examine a number of real-world use cases and hands-on code examples.\n" +
-	            "Distribute your microservices in a completely new way"));
-	      bookRepository.save(new Book("Pro Spring Boot", "A no-nonsense guide containing case studies and best practise for Spring Boot"));
-	   };
-		}
+	@Bean
+	CommandLineRunner initData(BookRepository bookRepository){
+		return args -> {
+			bookRepository.save(new Book("Spring Microservices", "Learn how to efficiently build and implement microservices in Spring," +
+					"and how to use Docker and Mesos to push the boundaries. Examine a number of real-world use cases and hands-on code examples." +
+					"Distribute your microservices in a completely new way"));
+			bookRepository.save(new Book("Pro Spring Boot", "A no-nonsense guide containing case studies and best practise for Spring Boot"));
+		};
+	}
 
 	public static void main(String[] args) {
 		SpringApplication.run(SpringDataSampleApplication.class, args);
 	}
 }
 
-	@Entity
-	@Data
-	@NoArgsConstructor
-	class Book {
-	   @Id
-	   @GeneratedValue
-	   private Long id;
-	   private String title;
-	   private String description;
-	   Book(String title, String description) {
-	      this.title = title;
-	      this.description = description;
-	   }
-	}
+@Data
+@Entity
+@NoArgsConstructor
+class Book {
 
-	@RepositoryRestResource
-	interface  BookRepository extends CrudRepository {
+	@Id
+	@GeneratedValue
+	private Long id;
+	private String title;
+	private String description;
+
+	Book(String title, String description) {
+		this.title = title;
+		this.description = description;
 	}
+}
+
+@RepositoryRestResource
+interface  BookRepository extends CrudRepository<Book, Long> {
+
+}
