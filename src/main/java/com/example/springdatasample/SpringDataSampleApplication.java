@@ -67,5 +67,7 @@ class Book {
 interface  BookRepository extends CrudRepository<Book, Long> {
 	List findByTitle(@Param("title") String title);
 	List findByTitleContains(@Param("keyword") String keyword);
-
+	List findByPublishedDateAfter(@Param("publishedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publishedDate);
+  List findByTitleContainsAndPublishedDateAfter(@Param("keyword") String keyword,
+	@Param("publishedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publishedDate);
 }
