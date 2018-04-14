@@ -74,6 +74,10 @@ interface  BookRepository extends CrudRepository<Book, Long> {
 	List findByPublishedDateAfter(@Param("publishedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publishedDate);
   List findByTitleContainsAndPublishedDateAfter(@Param("keyword") String keyword,
 	@Param("publishedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publishedDate);
+	List<Book> findByTitleContainsAndPriceCurrencyAndPriceAmountBetween(@Param("keyword") String keyword,
+																		@Param("currency") Money.Currency currency,
+																		@Param("low") BigDecimal low,
+																		@Param("high") BigDecimal high);
 }
 
 @Embeddable
