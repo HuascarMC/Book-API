@@ -58,5 +58,7 @@ class Book {
 
 @RepositoryRestResource
 interface  BookRepository extends CrudRepository<Book, Long> {
-	
+	List findByTitle(@Param("title") String title);
+	List findByTitleContains(@Param("keyword") String keyword);
+
 }
