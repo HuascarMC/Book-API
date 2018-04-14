@@ -58,5 +58,5 @@ class Book {
 
 @RepositoryRestResource
 interface  BookRepository extends CrudRepository<Book, Long> {
-
+	
 }
