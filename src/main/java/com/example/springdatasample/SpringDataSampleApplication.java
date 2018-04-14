@@ -71,3 +71,21 @@ interface  BookRepository extends CrudRepository<Book, Long> {
   List findByTitleContainsAndPublishedDateAfter(@Param("keyword") String keyword,
 	@Param("publishedDate") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE) LocalDate publishedDate);
 }
+
+@Embeddable
+@Data
+@NoArgsConstructor
+class Money {
+   enum Currency {CAD, EUR, USD }
+   @DecimalMin(value="0",inclusive=false)
+   @Digits(integer=1000000000,fraction=2)
+   private BigDecimal amount;
+   private Currency currency;
+   Money(BigDecimal amount){
+      this(Currency.USD, this.amount);
+   }
+   Money(Currency currency, BigDecimal amount){
+      this.currency = currency;
+      this.amount = amount;
+   }
+}
